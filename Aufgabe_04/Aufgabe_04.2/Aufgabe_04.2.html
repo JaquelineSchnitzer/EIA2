@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="de">
+<!--  
+Aufgabe: Aufgabe 04
+Name: Jaqueline Schnitzer
+Matrikel: 258020
+Datum: 06.05.2018
+Hiermit versichere ich, dass ich diesen
+Code selbst geschrieben habe. Er wurde
+nicht kopiert und auch nicht diktiert.
+-->
+<head>
+<meta charset="utf-8">
+<title>Aufgabe 4</title>
+<script src="Aufgabe_04.2.js"></script>
+<script src="Interfaces.js"></script>
+<link rel="stylesheet" href="Aufgabe_04.2.css">
+</head>
+
+<body>
+	<div class="unserInterface">
+
+		<div id="playerName">
+			<p>Bitte Spielername eingeben</p>
+			<input type="text" name="player"
+				placeholder="Hier Spielername eingeben" />
+		</div>
+
+		<div>
+			<button id="addPlayer">Spieler hinzufügen</button>
+			<button id="removePlayer">Spieler entfernen</button>
+		</div>
+
+		<p>Wähle ein Kartendeck</p>
+		<select id="slider" name="cardDeck" onchange="createSlider()">
+			<option disabled selected>Wähle dein Kartendeck</option>
+			<option value="animal">Tiere</option>
+			<option value="color">Farben</option>
+			<option value="names">Namen</option>
+		</select>
+
+		<p>Bitte Anzahl der Kartenpaare wählen</p>
+		<div id="sliderDiv"></div>
+
+		<button id="start">Spiel starten</button>
+
+	</div>
+
+
+	<section id="playerInfo">
+		<h2>Spielinfo</h2>
+	</section>
+	
+	<section id="cardField">
+		<h2>Spielbrett</h2>
+		<div id="card-container"></div>
+	</section>
+
+</body>
+</html>
