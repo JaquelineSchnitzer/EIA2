@@ -23,10 +23,9 @@ var L09_Canvas;
         // Sandkorn
         const height = crc2.canvas.height;
         for (let i = 0; i < 25; i++) {
-            let a = Math.random() * crc2.canvas.width;
-            let b = Math.floor(Math.random() * (height - 90 / 100 * height + 1)) + 90 / 100 * height;
-            let c = Math.random() * (10 - 5) + 5;
-            drawSandkorn(a, b, c);
+            let x = Math.random() * 400 + 0;
+            let y = Math.random() * (600 - 530) + 530;
+            drawSandkorn(x, y);
         }
         // Position Pflanze
         drawPlant(330, 500);
@@ -87,7 +86,7 @@ var L09_Canvas;
         crc2.closePath();
     }
     // Sandkorn 
-    function drawSandkorn(_x, _y, _r) {
+    function drawSandkorn(_x, _y) {
         crc2.beginPath();
         crc2.arc(_x + 17, _y - 10, 4, 0, Math.PI * 2, true);
         crc2.closePath();

@@ -29,10 +29,9 @@ namespace L09_Canvas {
         // Sandkorn
         const height = crc2.canvas.height;
         for (let i: number = 0; i < 25; i++) {
-            let a: number = Math.random() * crc2.canvas.width;
-            let b: number = Math.floor(Math.random() * (height - 90 / 100 * height + 1)) + 90 / 100 * height;
-            let c: number = Math.random() * (10 - 5) + 5;
-            drawSandkorn(a, b, c);
+            let x: number = Math.random() * 400 + 0;
+            let y: number = Math.random() * (600 - 530) + 530;
+            drawSandkorn(x, y);
         }
 
         // Position Pflanze
@@ -108,7 +107,7 @@ namespace L09_Canvas {
 
 
     // Sandkorn 
-    function drawSandkorn(_x: number, _y: number, _r: number): void {
+    function drawSandkorn(_x: number, _y: number): void {
         crc2.beginPath();
         crc2.arc(_x + 17, _y - 10, 4, 0, Math.PI * 2, true);
         crc2.closePath();
