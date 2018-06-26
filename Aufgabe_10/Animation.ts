@@ -48,8 +48,8 @@ namespace L10_Animation {
         // Animation für Luftblasen
         for (let i: number = 0; i < n; i++) {
             let bubbles: Bubble = new Bubble();
-            bubbles.x = Math.random() * (500 - 450) + 450;
-            bubbles.y = Math.random() * 180;
+            bubbles.x = Math.random() * (500 - 450) + 45;
+            bubbles.y = Math.random() * 400;
             Bubbles.push(bubbles);
         }
 
@@ -57,7 +57,7 @@ namespace L10_Animation {
     }
 
     function animate(): void {
-        window.setTimeout(animate, 10);
+        window.setTimeout(animate, 25);
         crc2.putImageData(imagedata, 0, 0);
 
         moveFish();

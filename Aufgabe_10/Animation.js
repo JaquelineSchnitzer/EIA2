@@ -41,14 +41,14 @@ var L10_Animation;
         // Animation f�r Luftblasen
         for (let i = 0; i < n; i++) {
             let bubbles = new L10_Animation.Bubble();
-            bubbles.x = Math.random() * (500 - 450) + 450;
-            bubbles.y = Math.random() * 180;
+            bubbles.x = Math.random() * (500 - 450) + 45;
+            bubbles.y = Math.random() * 400;
             Bubbles.push(bubbles);
         }
         animate();
     }
     function animate() {
-        window.setTimeout(animate, 10);
+        window.setTimeout(animate, 25);
         L10_Animation.crc2.putImageData(imagedata, 0, 0);
         moveFish();
         drawFish();

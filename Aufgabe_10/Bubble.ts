@@ -7,10 +7,10 @@ namespace L10_Animation {
         // declare method without keyword function
         move(): void {
             this.x += 0;
-            this.y -= 5;
+            this.y -= 2;
 
             if (this.y < 0) {
-                this.y = 600;
+                this.y = 365;
             }
         }
 
