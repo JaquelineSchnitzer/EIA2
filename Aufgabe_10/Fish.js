@@ -43,7 +43,6 @@ var L10_Animation;
             L10_Animation.crc2.moveTo(this.x + 25, this.y - 20);
             L10_Animation.crc2.bezierCurveTo(this.x + 30, this.y - 12, this.x + 32, this.y + 12, this.x + 25, this.y + 20);
             L10_Animation.crc2.stroke();
-            L10_Animation.crc2.closePath();
         }
     }
     L10_Animation.Fish = Fish;

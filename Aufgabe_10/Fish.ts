@@ -53,7 +53,7 @@ namespace L10_Animation {
             crc2.moveTo(this.x + 25, this.y - 20);
             crc2.bezierCurveTo(this.x + 30, this.y - 12, this.x + 32, this.y + 12, this.x + 25, this.y + 20);
             crc2.stroke();
-            crc2.closePath();
+            
         }
     }
 }
