@@ -7,7 +7,6 @@ namespace L11_Animation {
 
         constructor() {
             super();
-            this.color = "brown";
             this.stopFood = Math.random() * (600 - 500) + 500;
         }
         
@@ -27,6 +26,7 @@ namespace L11_Animation {
             crc2.beginPath();
             crc2.arc(this.x, this.y, 5, 0, 2 * Math.PI);
             crc2.closePath();
+            crc2.fillStyle ="brown";
             crc2.fill();
         }
     }
