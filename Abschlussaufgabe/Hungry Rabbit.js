@@ -1,26 +1,26 @@
 var L12_Abschlussaufgabe;
 (function (L12_Abschlussaufgabe) {
     // Variablen deklarieren
-    let can = document.getElementsByTagName('canvas')[0];
-    let ctx = can.getContext('2d');
+    var can = document.getElementsByTagName('canvas')[0];
+    var ctx = can.getContext('2d');
     // Buttons zum Steuern des Hase
-    const speedButtons = 6; //Geschwindigkeit der Buttons
-    const speedKeys = 10; // Geschwinidkeit der Tastatur
+    var speedButtons = 6; //Geschwindigkeit der Buttons
+    var speedKeys = 10; // Geschwinidkeit der Tastatur
     // Konstanten und Variablen f�r Buttons
-    const bLinks = document.getElementById('buttonLeft');
-    const bRechts = document.getElementById('buttonRight');
-    let bLinksActive = false;
-    let bRechtsActive = false;
+    var bLinks = document.getElementById('buttonLeft');
+    var bRechts = document.getElementById('buttonRight');
+    var bLinksActive = false;
+    var bRechtsActive = false;
     // Startpositionen
-    let haseX = 50;
-    let haseY = 380;
-    let chocolateX = 50;
-    let chocolateY = 50;
-    let carrotX = 150;
-    let carrotY = 50;
+    var haseX = 50;
+    var haseY = 380;
+    var chocolateX = 50;
+    var chocolateY = 50;
+    var carrotX = 150;
+    var carrotY = 50;
     //Bild-Klasse (Klasse aller Bilder, die im Canvas verwendet werden)
-    class Bild {
-        constructor(x, y, scaleX, scaleY, imgsrc) {
+    var Bild = /** @class */ (function () {
+        function Bild(x, y, scaleX, scaleY, imgsrc) {
             this.x = x;
             this.y = y;
             this.scaleX = scaleX;
@@ -28,54 +28,55 @@ var L12_Abschlussaufgabe;
             this.image = new Image();
             this.image.src = imgsrc;
         }
-        draw() {
+        Bild.prototype.draw = function () {
             ctx.drawImage(this.image, this.x, this.y, this.scaleX, this.scaleY);
-        }
-        move(x, y) {
+        };
+        Bild.prototype.move = function (x, y) {
             this.x = x;
             this.y = y;
             this.draw();
-        }
-    }
+        };
+        return Bild;
+    }());
     //Erzeugung der Bilder im Canvas
-    const hase = new Bild(50, 380, 120, 150, 'image/hase.png');
-    const chocolate = new Bild(50, 200, 65, 65, 'image/Schoko.png');
-    const carrot = new Bild(150, 50, 65, 65, 'image/karotte..png');
+    var hase = new Bild(50, 380, 120, 150, 'image/hase.png');
+    var chocolate = new Bild(50, 200, 65, 65, 'image/Schoko.png');
+    var carrot = new Bild(150, 50, 65, 65, 'image/karotte..png');
     //Canvas Gr��e
-    window.onload = () => {
+    window.onload = function () {
         can.height = window.innerHeight - 100; // -100, da Platz f�r Buttons ben�tigt wird.
         can.width = window.innerWidth;
         animateAll();
     };
     //Resize
-    window.addEventListener('resize', () => {
+    window.addEventListener('resize', function () {
         can.height = window.innerHeight - 100;
         can.width = window.innerWidth;
     });
     //Eventlistener zun Bewegen des Hasen
     window.addEventListener('keydown', down);
-    bLinks.addEventListener('mousedown', () => {
+    bLinks.addEventListener('mousedown', function () {
         bLinksActive = true;
     });
-    bRechts.addEventListener('mousedown', () => {
+    bRechts.addEventListener('mousedown', function () {
         bRechtsActive = true;
     });
-    bLinks.addEventListener('mouseup', () => {
+    bLinks.addEventListener('mouseup', function () {
         bLinksActive = false;
     });
-    bRechts.addEventListener('mouseup', () => {
+    bRechts.addEventListener('mouseup', function () {
         bRechtsActive = false;
     });
-    bLinks.addEventListener('touchstart', () => {
+    bLinks.addEventListener('touchstart', function () {
         bLinksActive = true;
     });
-    bRechts.addEventListener('touchstart', () => {
+    bRechts.addEventListener('touchstart', function () {
         bRechtsActive = true;
     });
-    bLinks.addEventListener('touchend', () => {
+    bLinks.addEventListener('touchend', function () {
         bLinksActive = false;
     });
-    bRechts.addEventListener('touchend', () => {
+    bRechts.addEventListener('touchend', function () {
         bRechtsActive = false;
     });
     /* down() wird in einer Dauerschleife ausgef�hrt.
@@ -83,7 +84,7 @@ var L12_Abschlussaufgabe;
     auf der Seite gedr�ckt werden, wird ein boolean auf true gesetzt und der Hase wird bewegt. */
     function down(evt) {
         // Pfeiltasten
-        if (evt != null) {
+        if (evt != null) { //Ist eine Taste gedr�ckt?
             if (evt.keyCode === 39)
                 if (haseX < innerWidth - 174)
                     haseX += speedKeys;
@@ -91,7 +92,8 @@ var L12_Abschlussaufgabe;
                 if (haseX >= 0)
                     haseX -= speedKeys;
         }
-        else {
+        // Buttons
+        else { //Wenn nein, dann mache weiter mit Buttons auf der Website
             if (bLinksActive)
                 if (haseX >= 0)
                     haseX -= speedButtons;
@@ -99,8 +101,8 @@ var L12_Abschlussaufgabe;
                 if (haseX < innerWidth - 174)
                     haseX += speedButtons;
         }
-        console.log(haseX);
-        console.log("innerWidth: " + innerWidth);
+        //console.log(haseX);
+        //console.log("innerWidth: " + innerWidth);
     }
     //Animations-Funktion mit Endlos-Schleife
     function animateAll() {
@@ -108,8 +110,7 @@ var L12_Abschlussaufgabe;
         ctx.clearRect(0, 0, innerWidth, innerHeight);
         down(undefined);
         hase.move(haseX, haseY);
-        chocolate.move(chocolateX, chocolateY);
-        carrot.move(carrotX, carrotY);
+        chocolate.move(chocolateX, chocolateY += 1);
+        carrot.move(carrotX, carrotY += 2);
     }
 })(L12_Abschlussaufgabe || (L12_Abschlussaufgabe = {}));
-//# sourceMappingURL=Hungry Rabbit.js.map

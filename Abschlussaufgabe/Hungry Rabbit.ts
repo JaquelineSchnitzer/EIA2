@@ -3,12 +3,12 @@ namespace L12_Abschlussaufgabe {
     // Variablen deklarieren
     let can: HTMLCanvasElement = document.getElementsByTagName('canvas')[0];
     let ctx = can.getContext('2d');
-    
+
     // Buttons zum Steuern des Hase
     const speedButtons: number = 6; //Geschwindigkeit der Buttons
     const speedKeys: number = 10; // Geschwinidkeit der Tastatur
 
-    // Konstanten und Variablen für Buttons
+    // Konstanten und Variablen fï¿½r Buttons
     const bLinks = document.getElementById('buttonLeft');
     const bRechts = document.getElementById('buttonRight');
     let bLinksActive: boolean = false;
@@ -55,14 +55,14 @@ namespace L12_Abschlussaufgabe {
     const chocolate = new Bild(50, 200, 65, 65, 'image/Schoko.png');
     const carrot = new Bild (150, 50, 65, 65, 'image/karotte..png');
 
-    //Canvas Größe
+    //Canvas Grï¿½ï¿½e
     window.onload = () => {
-        can.height = window.innerHeight - 100; // -100, da Platz für Buttons benötigt wird.
+        can.height = window.innerHeight - 100; // -100, da Platz fï¿½r Buttons benï¿½tigt wird.
         can.width = window.innerWidth;
-        animateAll();  
+        animateAll();
     };
-    
-    
+
+
     //Resize
     window.addEventListener('resize', () => {
         can.height = window.innerHeight - 100;
@@ -95,12 +95,12 @@ namespace L12_Abschlussaufgabe {
     bRechts.addEventListener('touchend', () => {
         bRechtsActive = false;
     });
-    /* down() wird in einer Dauerschleife ausgeführt.
+    /* down() wird in einer Dauerschleife ausgefï¿½hrt.
     Wenn ein Key Press stattfindet, wird down() direkt aus dem Eventlistener aufgerufen. Wenn die Buttons
-    auf der Seite gedrückt werden, wird ein boolean auf true gesetzt und der Hase wird bewegt. */
+    auf der Seite gedrï¿½ckt werden, wird ein boolean auf true gesetzt und der Hase wird bewegt. */
     function down(evt: KeyboardEvent): void {
         // Pfeiltasten
-        if (evt != null) { //Ist eine Taste gedrückt?
+        if (evt != null) { //Ist eine Taste gedrï¿½ckt?
             if (evt.keyCode === 39)
                 if (haseX < innerWidth - 174)
                     haseX += speedKeys;
@@ -118,10 +118,9 @@ namespace L12_Abschlussaufgabe {
                 if (haseX < innerWidth - 174)
                     haseX += speedButtons;
         }
-        console.log(haseX);
-        console.log("innerWidth: " + innerWidth);
+        //console.log(haseX);
+        //console.log("innerWidth: " + innerWidth);
     }
-
 
     //Animations-Funktion mit Endlos-Schleife
     function animateAll(): void {
@@ -129,7 +128,7 @@ namespace L12_Abschlussaufgabe {
         ctx.clearRect(0, 0, innerWidth, innerHeight);
         down(undefined);
         hase.move(haseX, haseY);
-        chocolate.move(chocolateX, chocolateY);
-        carrot.move(carrotX, carrotY);
+        chocolate.move(chocolateX, chocolateY += 1);
+        carrot.move(carrotX, carrotY += 2);
     }
 }
