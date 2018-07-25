@@ -1,0 +1,17 @@
+body {
+    overflow: hidden;
+
+}
+#buttonLeft {
+    position: absolute;
+    height: 30px;
+    width: 30px;
+    left: calc(50% - 60px);
+}
+
+#buttonRight {
+    position: absolute;
+    height: 30px;
+    width: 30px;
+    left: calc(50% - 20px);
+}
