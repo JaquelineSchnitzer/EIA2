@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+body {
+    overflow: hidden;
+}
+#buttonLeft {
+    position: absolute;
+    height: 50px;
+    width: 80px;
+    left: calc(50% - 110px);
+    background-color: white;
+    color: black;
+    border: 2px solid #4CAF50; /* Green */
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
+}
+
+#buttonRight {
+    position: absolute;
+    height: 50px;
+    width: 80px;
+    left: calc(50% - 5px);
+    background-color: white;
+    color: black;
+    border: 2px solid #4CAF50; /* Green */
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
+}
+
+canvas {
+	border: 2px solid black;
+}
