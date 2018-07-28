@@ -22,6 +22,8 @@ var L13_Test;
     // Array f�r Schokost�cke und Karotten
     let vielSchokolade = [];
     let vielKarotte = [];
+    let score = 0;
+    const showScore = document.getElementById('score');
     // Init Funktion
     function init() {
         let canvas = document.getElementsByTagName("canvas")[0];
@@ -71,6 +73,7 @@ var L13_Test;
         for (let i = 0; i < 3; i++) {
             vielKarotte.push(new Bild(Math.random() * canvas.width, -100, 65, 65, 'image/karotte..png', true));
         }
+        alert("Helfe Rabbit seinen Hunger zu besiegen. Sammle mit den Pfeiltasten oder den Button die herunterfallenden Karotten ein. Doch Vorsicht! Schokolade ist nicht gut f�r Kaninchen, meide sie.");
         animateAll();
     }
     //Bild-Klasse (Klasse aller Bilder, die im Canvas verwendet werden)
@@ -168,10 +171,19 @@ var L13_Test;
         L13_Test.ctx.putImageData(imagedata, 0, 0);
         down(undefined);
         hase.move(haseX, haseY);
-        for (let i = 0; i < vielSchokolade.length; i++)
+        showScore.innerText = `Score: ${score}`;
+        for (let i = 0; i < vielSchokolade.length; i++) {
             vielSchokolade[i].move(undefined, undefined);
-        for (let i = 0; i < vielKarotte.length; i++)
+            if (hase.x > vielSchokolade[i].x && hase.x < vielSchokolade[i].x + 40 && hase.y > vielSchokolade[i].y && hase.y < vielSchokolade[i].y + 40)
+                score--;
+        }
+        for (let i = 0; i < vielKarotte.length; i++) {
             vielKarotte[i].move(undefined, undefined);
+            if (hase.x > vielKarotte[i].x && hase.x < vielKarotte[i].x + 40 && hase.y > vielKarotte[i].y && hase.y < vielKarotte[i].y + 40)
+                score++;
+        }
+        if (score < 0)
+            alert("Oh oh. Rabbit hat zu viel Schokolade gefressen.");
     }
 })(L13_Test || (L13_Test = {}));
 //# sourceMappingURL=test.js.map

@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 
+* {
+	font-family: 'Roboto', sans-serif;
+}
+
 body {
     overflow: hidden;
 }
@@ -29,4 +33,11 @@ body {
 
 canvas {
 	border: 2px solid black;
+}
+
+#score {
+	position: absolute;
+	left: 50px;
+	font-size: 20px;
+	
 }

@@ -25,6 +25,10 @@ namespace L13_Test {
     // Array für Schokostücke und Karotten
     let vielSchokolade: Bild[] = [];
     let vielKarotte: Bild[] = [];
+    
+    
+    let score: number = 0;
+    const showScore = document.getElementById('score');
 
 
     // Init Funktion
@@ -73,6 +77,7 @@ namespace L13_Test {
         // Hintergrund
         imagedata = ctx.getImageData(0, 0, canvas.width, canvas.height);
 
+
         // Mehr Futter erzeugen
         for (let i: number = 0; i < 5; i++) {
             vielSchokolade.push(new Bild(Math.random() * canvas.width, -100, 65, 65, 'image/Schoko.png', true));
@@ -82,8 +87,10 @@ namespace L13_Test {
             vielKarotte.push(new Bild(Math.random() * canvas.width, -100, 65, 65, 'image/karotte..png', true));
         }
 
+        alert("Helfe Rabbit seinen Hunger zu besiegen. Sammle mit den Pfeiltasten oder den Button die herunterfallenden Karotten ein. Doch Vorsicht! Schokolade ist nicht gut für Kaninchen, meide sie.");
         animateAll();
     }
+
 
 
     //Bild-Klasse (Klasse aller Bilder, die im Canvas verwendet werden)
@@ -196,20 +203,28 @@ namespace L13_Test {
         }
     }
 
-
     //Animations-Funktion mit Endlos-Schleife
     function animateAll(): void {
         requestAnimationFrame(animateAll);
         ctx.clearRect(0, 0, innerWidth, innerHeight);
         ctx.putImageData(imagedata, 0, 0);
+        
         down(undefined);
         hase.move(haseX, haseY);
+        showScore.innerText = `Score: ${score}`;
 
-        for (let i: number = 0; i < vielSchokolade.length; i++)
+        for (let i: number = 0; i < vielSchokolade.length; i++) {
             vielSchokolade[i].move(undefined, undefined);
-
-        for (let i: number = 0; i < vielKarotte.length; i++)
+            if (hase.x > vielSchokolade[i].x && hase.x < vielSchokolade[i].x + 40 && hase.y > vielSchokolade[i].y && hase.y < vielSchokolade[i].y + 40)
+                score--; 
+            }
+        for (let i: number = 0; i < vielKarotte.length; i++) {
             vielKarotte[i].move(undefined, undefined);
-
+             if (hase.x > vielKarotte[i].x && hase.x < vielKarotte[i].x + 40 && hase.y > vielKarotte[i].y && hase.y < vielKarotte[i].y + 40)
+                score++; 
+            }
+        if (score < 0)
+            alert("Oh oh. Rabbit hat zu viel Schokolade gefressen.");
     }
+
 }
