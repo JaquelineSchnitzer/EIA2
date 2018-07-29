@@ -5,8 +5,8 @@ var L13_Test;
     // Hintergrund
     let imagedata;
     // Buttons zum Steuern des Hase
-    const speedButtons = 6; //Geschwindigkeit der Buttons
-    const speedKeys = 10; // Geschwindikeit der Tastatur
+    const speedButtons = 6;
+    const speedKeys = 10;
     // Konstanten und Variablen f�r Buttons
     const bLinks = document.getElementById('buttonLeft');
     const bRechts = document.getElementById('buttonRight');
@@ -14,16 +14,25 @@ var L13_Test;
     let bRechtsActive = false;
     // Startpositionen Kaninchen, Karotte und Schokolade
     let haseX = 50;
-    let haseY = canvas.height + 240; // damit Hase immer im Canvas gezeichnet wird
+    let haseY = window.innerHeight - 240; // damit Hase immer im Canvas gezeichnet wird
     let chocolateX = Math.random() * canvas.width;
-    let chocolateY = -150; //damit es breits �ber Canvas gezeichnet wird
+    let chocolateY = -150; //damit es bereits �ber Canvas gezeichnet wird
     let carrotX = Math.random() * canvas.width;
     let carrotY = -100;
     // Array f�r Schokost�cke und Karotten
     let vielSchokolade = [];
     let vielKarotte = [];
+    // Score
     let score = 0;
     const showScore = document.getElementById('score');
+    // H�he und Breite f�r bild.ts
+    L13_Test.height = window.innerHeight - 100;
+    ;
+    L13_Test.width = window.innerWidth - 20;
+    ;
+    //Ist das Spiel vorbei?
+    let msgOnlyOnes = false;
+    let isGameOver = false;
     // Init Funktion
     function init() {
         let canvas = document.getElementsByTagName("canvas")[0];
@@ -38,21 +47,21 @@ var L13_Test;
         wiese.draw();
         const gras = new L13_Test.Gras(50, canvas.height - 100);
         gras.draw();
-        const gras1 = new L13_Test.Gras1(52, canvas.height - 102);
+        const gras1 = new L13_Test.Gras(500, canvas.height - 50);
         gras1.draw();
-        const gras2 = new L13_Test.Gras2(500, canvas.height - 50);
+        const gras2 = new L13_Test.Gras(1000, canvas.height - 50);
         gras2.draw();
-        const gras3 = new L13_Test.Gras2(1000, canvas.height - 50);
+        const gras3 = new L13_Test.Gras(795, canvas.height - 17);
         gras3.draw();
-        const gras7 = new L13_Test.Gras2(795, canvas.height - 17);
-        gras7.draw();
-        const gras4 = new L13_Test.Gras3(501, canvas.height - 53);
+        const gras4 = new L13_Test.Gras1(52, canvas.height - 102);
         gras4.draw();
-        const gras5 = new L13_Test.Gras3(1002, canvas.height - 51);
+        const gras5 = new L13_Test.Gras1(501, canvas.height - 53);
         gras5.draw();
-        const gras6 = new L13_Test.Gras3(800, canvas.height - 17);
+        const gras6 = new L13_Test.Gras1(1002, canvas.height - 51);
         gras6.draw();
-        const gras8 = new L13_Test.Gras3(795, canvas.height - 20);
+        const gras7 = new L13_Test.Gras1(800, canvas.height - 17);
+        gras7.draw();
+        const gras8 = new L13_Test.Gras1(795, canvas.height - 20);
         gras8.draw();
         const wolke = new L13_Test.Wolke(100, 100);
         wolke.draw();
@@ -68,49 +77,17 @@ var L13_Test;
         imagedata = L13_Test.ctx.getImageData(0, 0, canvas.width, canvas.height);
         // Mehr Futter erzeugen
         for (let i = 0; i < 5; i++) {
-            vielSchokolade.push(new Bild(Math.random() * canvas.width, -100, 65, 65, 'image/Schoko.png', true));
+            vielSchokolade.push(new L13_Test.Bild(Math.random() * canvas.width, -100, 65, 65, 'image/Schoko.png', true));
         }
         for (let i = 0; i < 3; i++) {
-            vielKarotte.push(new Bild(Math.random() * canvas.width, -100, 65, 65, 'image/karotte..png', true));
+            vielKarotte.push(new L13_Test.Bild(Math.random() * canvas.width, -100, 65, 65, 'image/karotte..png', true));
         }
-        alert("Helfe Rabbit seinen Hunger zu besiegen. Sammle mit den Pfeiltasten oder den Button die herunterfallenden Karotten ein. Doch Vorsicht! Schokolade ist nicht gut f�r Kaninchen, meide sie.");
         animateAll();
     }
-    //Bild-Klasse (Klasse aller Bilder, die im Canvas verwendet werden)
-    class Bild {
-        constructor(x, y, scaleX, scaleY, imgsrc, moving) {
-            this.x = x;
-            this.y = y;
-            this.scaleX = scaleX;
-            this.scaleY = scaleY;
-            this.image = new Image();
-            this.image.src = imgsrc;
-            this.moving = moving;
-            this.speed = Math.random() + 1;
-        }
-        draw() {
-            L13_Test.ctx.drawImage(this.image, this.x, this.y, this.scaleX, this.scaleY);
-        }
-        move(x, y) {
-            if (this.moving) {
-                this.y += this.speed;
-                if (this.edges()) {
-                    this.y = -50;
-                    this.x = Math.random() * canvas.width;
-                }
-            }
-            else {
-                this.x = x;
-                this.y = y;
-            }
-            this.draw();
-        }
-        edges() {
-            return this.y > canvas.height;
-        }
-    }
-    //Erzeugung der Bilder im Canvas
-    const hase = new Bild(50, canvas.height + 240, 120, 150, 'image/hase.png', false);
+    // Init zu Ende
+    alert("Helfe Rabbit seinen Hunger zu besiegen. Sammle mit den Pfeiltasten oder den Button die herunterfallenden Karotten ein. Doch Vorsicht! Schokolade ist nicht gut f�r Kaninchen, meide sie. Du hast zwei Minuten Zeit.");
+    //Erzeugung Kaninchen im Canvas
+    const hase = new L13_Test.Bild(50, canvas.height + 240, 120, 150, 'image/hase.png', false);
     //Resize
     window.addEventListener('resize', () => {
         canvas.height = window.innerHeight - 100;
@@ -166,24 +143,52 @@ var L13_Test;
     }
     //Animations-Funktion mit Endlos-Schleife
     function animateAll() {
-        requestAnimationFrame(animateAll);
-        L13_Test.ctx.clearRect(0, 0, innerWidth, innerHeight);
-        L13_Test.ctx.putImageData(imagedata, 0, 0);
-        down(undefined);
-        hase.move(haseX, haseY);
-        showScore.innerText = `Score: ${score}`;
-        for (let i = 0; i < vielSchokolade.length; i++) {
-            vielSchokolade[i].move(undefined, undefined);
-            if (hase.x > vielSchokolade[i].x && hase.x < vielSchokolade[i].x + 40 && hase.y > vielSchokolade[i].y && hase.y < vielSchokolade[i].y + 40)
-                score--;
+        if (!isGameOver) {
+            requestAnimationFrame(animateAll);
+            L13_Test.ctx.clearRect(0, 0, innerWidth, innerHeight);
+            L13_Test.ctx.putImageData(imagedata, 0, 0);
+            down(undefined);
+            hase.move(haseX, haseY);
+            showScore.innerText = `Score: ${score}`;
+            // Viel Schokolade erzeugen und auffangen
+            for (let i = 0; i < vielSchokolade.length; i++) {
+                vielSchokolade[i].move(undefined, undefined);
+                let distanceChocolate = Math.sqrt(Math.pow(vielSchokolade[i].x - haseX, 2) + Math.pow(vielSchokolade[i].y - haseY, 2));
+                if (distanceChocolate < 50) {
+                    score--;
+                }
+            }
+            // Viele Karotten erzeugen und auffangen
+            for (let i = 0; i < vielKarotte.length; i++) {
+                vielKarotte[i].move(undefined, undefined);
+                let distanceCarrot = Math.sqrt(Math.pow(vielKarotte[i].x - haseX, 2) + Math.pow(vielKarotte[i].y - haseY, 2));
+                if (distanceCarrot < 50) {
+                    score++;
+                }
+            }
+            gameOver(false);
         }
-        for (let i = 0; i < vielKarotte.length; i++) {
-            vielKarotte[i].move(undefined, undefined);
-            if (hase.x > vielKarotte[i].x && hase.x < vielKarotte[i].x + 40 && hase.y > vielKarotte[i].y && hase.y < vielKarotte[i].y + 40)
-                score++;
+        // Timer
+        const time = setTimeout(() => { gameOver(true); }, 120000);
+        // Game Over
+        function gameOver(timeOut) {
+            if (score < 0 && !timeOut) {
+                isGameOver = true;
+                if (!msgOnlyOnes) {
+                    msgOnlyOnes = true;
+                    alert("Oh oh. Rabbit hat zu viel Schokolade gefressen. Versuche es erneut. Viel Gl�ck!");
+                    location.reload();
+                }
+            }
+            else if (timeOut) {
+                isGameOver = true;
+                if (!msgOnlyOnes) {
+                    msgOnlyOnes = true;
+                    alert("Gut gemacht! Rabbit ist satt :)");
+                    location.reload();
+                }
+            }
         }
-        if (score < 0)
-            alert("Oh oh. Rabbit hat zu viel Schokolade gefressen.");
     }
 })(L13_Test || (L13_Test = {}));
-//# sourceMappingURL=test.js.map
+//# sourceMappingURL=main.js.map

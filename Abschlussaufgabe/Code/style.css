@@ -39,5 +39,11 @@ canvas {
 	position: absolute;
 	left: 50px;
 	font-size: 20px;
-	
 }
+
+@media screen and (max-width: 400px) {
+    #score {
+        position: absolute;
+        left: 10px;
+        font-size: 14px;
+    }
